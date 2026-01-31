@@ -40,7 +40,7 @@ const MyOrders = () => {
                                 </div>
                             </div>
                         
-                        <div>
+                        <div className='flex flex-col justify-center md:ml-8 mb-4 md:mb-0'>
                             <p className=''>Quantity: {item.quantity || "1"}</p>
                              <p className=''>Status: {order.status}</p>
                              <p>Date: {new Date(order.createdAt).toLocaleDateString()}</p>

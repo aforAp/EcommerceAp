@@ -12,13 +12,18 @@ import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
 import AddAddress from './pages/AddAddress';
 import MyOrders from './pages/MyOrders';
+import SellerLogin from './components/seller/SellerLogin';
+import SellerLayout from './pages/seller/SellerLayout';
+import AddProduct from './pages/seller/AddProduct';
+import ProductList from './pages/seller/ProductList';
+import Orders from './pages/seller/Orders';
 const App = () => {
   //Now it will be displayes in the user dashboard only not in seller dashboard to confirm this 
   //we can use the location and see if it is there or not
   const isSellerPath = useLocation().pathname.includes('/seller');
-  const {showUserLogin} = useAppContext();
+  const {showUserLogin, isSeller} = useAppContext();
   return (
-    <div>
+    <div className='text-default min-h-screen text-gray-700 bg-white'>
       {isSellerPath ? null : <NavBar />}
       {showUserLogin ? <Login /> : null}
       <Toaster />
@@ -31,6 +36,11 @@ const App = () => {
         <Route path="/add-address" element={<AddAddress />} />
         <Route path='/products/:category/:id' element={<ProductDetails />} />
         <Route path="/my-orders" element={<MyOrders />} />
+        <Route path="/seller" element={isSeller ? <SellerLayout /> : <SellerLogin />}>
+           <Route index element={<AddProduct />} />
+           <Route path="product-list" element={<ProductList />} />
+           <Route path="orders" element={<Orders />} />
+        </Route>
         </Routes>
       </div>
       {
